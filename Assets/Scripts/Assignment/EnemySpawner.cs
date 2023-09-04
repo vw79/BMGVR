@@ -5,7 +5,9 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private float spawnInterval = 1f;
+    [SerializeField] private float[] spawnInterval = new float[2];
+    [SerializeField] private Vector3 minSpawnPosition;
+    [SerializeField] private Vector3 maxSpawnPosition;
 
     private void Start()
     {
@@ -17,16 +19,15 @@ public class EnemySpawner : MonoBehaviour
         while(true)
         {
             Instantiate(enemyPrefab, GetRandomPosition(), Quaternion.identity);
-            yield return new WaitForSeconds(spawnInterval);
+            yield return new WaitForSeconds(Random.Range(spawnInterval[0], spawnInterval[1]));
         }
     }
 
     private Vector3 GetRandomPosition()
     {
-        float x = Random.Range(-10f, 10f);
-        float y = Random.Range(10f, 20f);
-        float z = Random.Range(-10f, 10f);
-        return new Vector3(x, y, z);
+        return new Vector3(Random.Range(minSpawnPosition.x, maxSpawnPosition.x), 
+                           Random.Range(minSpawnPosition.y, maxSpawnPosition.y), 
+                           Random.Range(minSpawnPosition.z, maxSpawnPosition.z));
     }
 
     public void OnDisable()

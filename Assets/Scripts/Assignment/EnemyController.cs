@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
 
     private void ChasePlayer()
     {
-        transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.position.x, player.position.y + 1.5f, player.position.z), speed * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)

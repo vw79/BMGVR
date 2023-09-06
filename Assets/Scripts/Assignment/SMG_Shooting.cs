@@ -14,10 +14,8 @@ public class SMG_Shooting : MonoBehaviour
     private int currentBulletCount = 0;
     [SerializeField] private int maxBulletCount = 30;
     [SerializeField] private float bulletSpread = 0.05f;
-    private float shootInterval = 0.1f;
+    private float shootInterval = 0.07f;
 
-    private ActionBasedController controller;
-    private GameObject lefthand;
 
     private bool isReloading = false;
     private bool isShooting = false;
@@ -25,11 +23,6 @@ public class SMG_Shooting : MonoBehaviour
     private void Start()
     {
         currentBulletCount = maxBulletCount;
-        lefthand = GameObject.Find("LeftHand Controller");
-        Debug.Log(lefthand.name);
-        controller = lefthand.GetComponent<ActionBasedController>();
-        
-        Debug.Log(controller);
     }
 
     

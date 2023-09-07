@@ -6,6 +6,8 @@ using UnityEngine.UI;
 // (please put this script in canva component)
 // Script for UI canvas to track buttons and do their functions.
 
+[RequireComponent(typeof(ButtonsFunction))]
+
 public class UI_ButtonsManager : MonoBehaviour
 {
     public ButtonsFunction buttonsFunction;

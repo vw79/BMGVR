@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// (please put this script in canva component)
 // Script for UI canvas to follow camera (player) view.
 
 public class UI_Follow : MonoBehaviour

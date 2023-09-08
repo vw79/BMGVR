@@ -25,7 +25,6 @@ public class SMG_Shooting : Gun_Base
 
     private void Start()
     {
-        base.Start();
         currentBulletCount = maxBulletCount;
     }
 

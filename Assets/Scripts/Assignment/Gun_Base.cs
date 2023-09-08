@@ -5,32 +5,35 @@ using UnityEngine;
 
 public class Gun_Base : MonoBehaviour
 {
-    [SerializeField] private string gunType;
-    private XROrigin xrOrigin;
-    public GameObject gunPrefab { get; private set; }
+    [SerializeField] private SO_Gun gun;
 
-    protected void Start()
-    {
-        xrOrigin = FindObjectOfType<XROrigin>();
-        gunPrefab = this.gameObject;
-    }
 
     public void TriggerRegister()
     {
-        ChangeGun changeGun = xrOrigin.GetComponent<ChangeGun>();
+        ChangeGun changeGun = GameObject.Find("XR Origin").GetComponent<ChangeGun>();
         changeGun.RegisterGun(this);
     }
 
-    public void SpawnGun()
+    public void SpawnGun(Transform player)
     {
-        if(gunPrefab != null)
+        if(gun.gunPrefab != null)
         {
-            Instantiate(gunPrefab, xrOrigin.transform.position, xrOrigin.transform.rotation);
+            Instantiate(gun.gunPrefab, GetPlayerFrontPosition(player), player.rotation);
         }
+    }
+
+    public SO_Gun GetGun()
+    {
+        return gun;
     }
 
     public string GetGunType()
     {
-        return gunType;
+        return gun.gunType;
+    }
+
+    private Vector3 GetPlayerFrontPosition(Transform player)
+    {
+        return player.position + (player.gameObject.GetNamedChild("Main Camera").transform.forward * 3) + new Vector3(0,1,0);
     }
 }

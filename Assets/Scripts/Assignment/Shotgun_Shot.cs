@@ -23,7 +23,6 @@ public class Shotgun_Shot : Gun_Base
 
     private void Start()
     {
-        base.Start();
         currentBulletCount = maxBulletCount;
     }
 

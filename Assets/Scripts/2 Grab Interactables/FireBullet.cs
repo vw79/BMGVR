@@ -20,6 +20,7 @@ public class FireBullet : Gun_Base
 
     private void Start()
     {
+        base.Start();
         currentBulletCount = maxBulletCount;
     }
 

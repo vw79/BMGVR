@@ -23,6 +23,7 @@ public class Shotgun_Shot : Gun_Base
 
     private void Start()
     {
+        base.Start();
         currentBulletCount = maxBulletCount;
     }
 
@@ -36,7 +37,6 @@ public class Shotgun_Shot : Gun_Base
 
         for (int i = 0; i < pelletCount; i++)
         {
-            Debug.Log(frontOfGun.forward.x + UnityEngine.Random.Range(-pelletSpread, pelletSpread));
             GameObject spawnedBullet = Instantiate(bulletObj, (frontOfGun.position) + frontOfGun.forward * 0.3f, frontOfGun.rotation);
             spawnedBullet.GetComponent<Rigidbody>().velocity = speed * new Vector3(frontOfGun.forward.x + UnityEngine.Random.Range(-pelletSpread, pelletSpread), frontOfGun.forward.y + UnityEngine.Random.Range(-pelletSpread, pelletSpread), frontOfGun.forward.z);
             Destroy(spawnedBullet, 5f);

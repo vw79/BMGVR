@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -21,6 +22,6 @@ public class ChangeGun : MonoBehaviour
 
     public void RegisterGun(Gun_Base gun)
     {
-        
+
     }
 }

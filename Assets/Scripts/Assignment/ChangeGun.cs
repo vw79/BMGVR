@@ -64,7 +64,10 @@ public class ChangeGun : MonoBehaviour
         }
 
         currentGunIndex = (currentGunIndex + 1) % guns.Length;
-        Instantiate(guns[currentGunIndex].gunPrefab, new Vector3(GetPlayerFrontPosition().x, 1, GetPlayerFrontPosition().z), transform.rotation);
+        for (int i = 0; i < guns[currentGunIndex].gunCount; i++)
+        {
+            Instantiate(guns[currentGunIndex].gunPrefab, new Vector3(GetPlayerFrontPosition().x, Mathf.Clamp(GetPlayerFrontPosition().y, 1.5f, Mathf.Infinity), GetPlayerFrontPosition().z), transform.rotation);
+        }
     }
 
     private Vector3 GetPlayerFrontPosition()

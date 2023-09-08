@@ -7,4 +7,5 @@ public class SO_Gun : ScriptableObject
 {
     public string gunType;
     public GameObject gunPrefab;
+    public int gunCount;
 }

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunType: SMG
   gunPrefab: {fileID: 1650338423295010293, guid: 9a7667a8a3ba1ee4492f668fc9932857, type: 3}
+  gunCount: 2

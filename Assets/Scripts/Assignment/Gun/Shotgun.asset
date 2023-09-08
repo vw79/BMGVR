@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunType: Shotgun
   gunPrefab: {fileID: 2407717654933592857, guid: a58e3bd734eff7f4d8537f8ff8d0d64b, type: 3}
+  gunCount: 1

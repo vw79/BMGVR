@@ -4355,7 +4355,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2041991315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4490,8 +4490,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d06194f848178f84c837d895b9bc5640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hideCanvas: 0
   Boss: {fileID: 0}
+  buttonTrigger: {fileID: 0}
+  hideCanvas: 0
 --- !u!1 &2060188824
 GameObject:
   m_ObjectHideFlags: 0

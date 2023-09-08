@@ -5,11 +5,12 @@ public class BossState : MonoBehaviour
 {
     [Header("Animation State Names")]
     [SerializeField] private string idleAnimation = "Zombie Idle"; 
-    [SerializeField] private string attackAnimation = "Zombie Attack"; 
+    [SerializeField] private string attackAnimation = "Zombie Attack";
+
+    [SerializeField] private Material[] materials = new Material[2];
+    [SerializeField] private Renderer meshRenderer;
 
     private Animator animator;
-    [SerializeField] private float max_health = 2000f;
-    private float current_health;
 
     private void Start()
     {
@@ -18,10 +19,6 @@ public class BossState : MonoBehaviour
         // Start the enemy behavior loop.
         StartCoroutine(EnemyBehaviorLoop());
     }
-    private void Awake()
-    {
-        current_health = max_health;
-    }
 
     private IEnumerator EnemyBehaviorLoop()
     {
@@ -29,23 +26,42 @@ public class BossState : MonoBehaviour
         {
             // Attack state.
             animator.Play(attackAnimation);
-            yield return new WaitForSeconds(3.0f); 
+            yield return new WaitForSeconds(1.0f);
 
+            SpawnALotOfEnemies();
+            yield return new WaitForSeconds(2.0f);
             // Idle state.
             animator.Play(idleAnimation);
             yield return new WaitForSeconds(5.0f); 
         }
     }
 
-    public void TakeDamage(float damage)
+    private void SpawnALotOfEnemies()
     {
+        int spawnCount = Random.Range(20, 30);
+        for (int i = 0; i < spawnCount; i++)
         {
-            current_health -= damage;
+            GameObject.Find("Enemy Spawner").GetComponent<EnemySpawner>().SpawnEnemy();
         }
+    }
 
-        if (current_health <= 0)
-        {
-            Destroy(gameObject);
-        }
+    public void Injured()
+    {
+        meshRenderer.material = materials[1];
+        Invoke("EndInjured", 0.1f);
+    }
+
+    public void EndInjured()
+    {
+        meshRenderer.material = materials[0];
+    }
+
+    public void OnDeath()
+    {
+        // Stop the enemy behavior loop.
+        StopAllCoroutines();
+
+        // Play the death animation.
+        Destroy(gameObject);
     }
 }

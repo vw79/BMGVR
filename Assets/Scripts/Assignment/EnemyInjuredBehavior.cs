@@ -20,6 +20,6 @@ public class EnemyInjuredBehavior : MonoBehaviour
 
     public void EndInjured()
     {
-          meshRenderer.material = materials[0];
+        meshRenderer.material = materials[0];
     }
 }

@@ -11,19 +11,24 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SpawnEnemy());
+        StartCoroutine(SpawnEnemyTimer());
 
         //Ignore the collision between gun and enemy
         Physics.IgnoreLayerCollision(11,10);
     }
 
-    private IEnumerator SpawnEnemy()
+    private IEnumerator SpawnEnemyTimer()
     {
         while(true)
         {
-            Instantiate(enemyPrefab, GetRandomPosition(), Quaternion.identity);
+            SpawnEnemy();
             yield return new WaitForSeconds(Random.Range(spawnInterval[0], spawnInterval[1]));
         }
+    }
+
+    public void SpawnEnemy()
+    {
+        Instantiate(enemyPrefab, GetRandomPosition(), Quaternion.identity);
     }
 
     private Vector3 GetRandomPosition()

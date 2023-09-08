@@ -10,6 +10,9 @@ using UnityEngine.UI;
 public class UI_Hider : MonoBehaviour
 {
     [SerializeField] GameObject Boss;
+    [SerializeField] Button buttonTrigger;
+    private bool clicked = false;
+
     [SerializeField] bool hideCanvas;
     private Canvas canvas;
 
@@ -29,9 +32,21 @@ public class UI_Hider : MonoBehaviour
         {
             canvas.enabled = false; //hide ui
         }
+
+        if(buttonTrigger != null)
+        {
+            buttonTrigger.onClick.AddListener(ClickBoolChanger);
+            canvas.enabled = !clicked;
+        }
+
         else
         {
             canvas.enabled = !hideCanvas;
         }
+    }
+
+    private void ClickBoolChanger()
+    {
+        clicked = true;
     }
 }

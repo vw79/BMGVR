@@ -1,70 +1,73 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class Teleport : MonoBehaviour
 {
-    [Header("Ray Interaction")]
-    [SerializeField] private XRRayInteractor rayInteractor;
-    [SerializeField] private TeleportationProvider teleportationProvider;
+    [Header("Teleportation Button")]
+    [SerializeField] public InputAction teleportAction;
 
-    [Header("A button")]
-    [SerializeField] private InputAction aButtonAction;
-    [SerializeField] private InputAction bButtonAction;
-
-    [Header("Line Renderer for Teleportation")]
-    [SerializeField] private LineRenderer teleportLine;
-    private Vector3 teleportDestination;
+    [Header("Line Renderer")]
+    public LineRenderer lineRenderer; // Drag and drop your LineRenderer component here in the inspector
+    private bool isLineRendererActive = false; // To check the state of the LineRenderer
 
     void Start()
     {
-        rayInteractor.enabled = false;
-        teleportLine.enabled = false;
+        // Add listener for the action
+        teleportAction.performed += HandleButtonPress;
 
-        // Add listener for the aButtonAction and enable it
-        aButtonAction.performed += OnAButtonPressed;
-        aButtonAction.Enable();
+        // Enable the action
+        teleportAction.Enable();
+
+        // Initially disable the LineRenderer
+        lineRenderer.enabled = false;
     }
 
-    private void OnAButtonPressed(InputAction.CallbackContext context)
+    void Update()
     {
-        if (teleportLine.enabled)
+
+    }
+
+    private void HandleButtonPress(InputAction.CallbackContext context)
+    {
+        if (isLineRendererActive)
         {
-            // If the line renderer is enabled, teleport the player to the destination
-            TeleportPlayer();
+            MoveToLineEndPosition();
+            lineRenderer.enabled = false;
+            isLineRendererActive = false;
         }
         else
         {
-            // If the line renderer is not enabled, show the teleport line
-            ShowTeleportLine();
+            EnableLineRenderer();
+            isLineRendererActive = true;
         }
     }
 
-    private void ShowTeleportLine()
+    private void EnableLineRenderer()
     {
-        teleportLine.enabled = true;
+        Vector3 start = transform.position;
+        Vector3 end = GetPlayerFrontPosition();
 
-        // Define the start and end points of the line renderer
-        teleportLine.SetPosition(0, transform.position);
-
-        // Assuming the end point is 5 units in front of the player
-        teleportDestination = transform.position + transform.forward * 5f;
-        teleportLine.SetPosition(1, teleportDestination);
+        lineRenderer.SetPosition(0, start);
+        lineRenderer.SetPosition(1, end);
+        lineRenderer.enabled = true;
     }
 
-    private void TeleportPlayer()
+    private void MoveToLineEndPosition()
     {
-        if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit raycastHit))
+        Vector3 endPosition = lineRenderer.GetPosition(1);
+        GameObject xrRig = GameObject.Find("XR Origin"); // Assuming the XR Rig is named 'XR Rig'
+        if (xrRig != null)
         {
-            TeleportRequest teleportRequest = new TeleportRequest()
-            {
-                destinationPosition = raycastHit.point,
-            };
-
-            teleportationProvider.QueueTeleportRequest(teleportRequest);
-            teleportLine.enabled = false;
+            xrRig.transform.position = new Vector3(endPosition.x, xrRig.transform.position.y, endPosition.z);
         }
+    }
+
+    private Vector3 GetPlayerFrontPosition()
+    {
+        return transform.position + (GameObject.Find("Main Camera").transform.forward * 3) + new Vector3(0, 1, 0);
     }
 }

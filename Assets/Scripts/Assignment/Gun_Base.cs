@@ -21,6 +21,14 @@ public class Gun_Base : MonoBehaviour
         changeGun.RegisterGun(this);
     }
 
+    public void SpawnGun()
+    {
+        if(gunPrefab != null)
+        {
+            Instantiate(gunPrefab, xrOrigin.transform.position, xrOrigin.transform.rotation);
+        }
+    }
+
     public string GetGunType()
     {
         return gunType;

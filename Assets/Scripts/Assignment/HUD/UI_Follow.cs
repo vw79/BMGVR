@@ -8,17 +8,17 @@ using UnityEngine;
 public class UI_Follow : MonoBehaviour
 {
     // for camera
-    [SerializeField] private Transform playerCam_Transform;
+    [SerializeField] private Transform FollowTarget;
 
     // for UI
     [SerializeField] private float distanceFromCamera = 1.0f;
 
     private void LateUpdate()
     {
-        if (playerCam_Transform != null)
+        if (FollowTarget != null)
         {
-            transform.position = playerCam_Transform.position + (playerCam_Transform.forward) * distanceFromCamera;
-            transform.rotation = Quaternion.LookRotation(transform.position - playerCam_Transform.position); //(Need to think its logic)
+            transform.position = FollowTarget.position + (FollowTarget.forward) * distanceFromCamera;
+            transform.rotation = Quaternion.LookRotation(transform.position - FollowTarget.position); //(Need to think its logic)
         }
     }
 }

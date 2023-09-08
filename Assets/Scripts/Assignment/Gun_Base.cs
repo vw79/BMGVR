@@ -36,4 +36,9 @@ public class Gun_Base : MonoBehaviour
     {
         return player.position + (player.gameObject.GetNamedChild("Main Camera").transform.forward * 3) + new Vector3(0,1,0);
     }
+
+    public virtual void StartReloading()
+    {
+        
+    }
 }

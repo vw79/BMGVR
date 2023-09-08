@@ -9,8 +9,8 @@ public class Shotgun_Shot : Gun_Base
     public GameObject bulletObj;
     public Transform frontOfGun;
 
-    [SerializeField] private AudioClip gunShotSound;
-    [SerializeField] private AudioClip reloadSound;
+    [SerializeField] private AudioSource gunShotSource;
+    [SerializeField] private AudioSource reloadSource;
 
     [SerializeField] private int maxBulletCount = 1;
     private int currentBulletCount = 0;
@@ -31,8 +31,7 @@ public class Shotgun_Shot : Gun_Base
         if (isReloading) return;
 
         currentBulletCount--;
-        GetComponent<AudioSource>().clip = gunShotSound;
-        GetComponent<AudioSource>().Play();
+        gunShotSource.Play();
 
         for (int i = 0; i < pelletCount; i++)
         {
@@ -51,10 +50,16 @@ public class Shotgun_Shot : Gun_Base
     private IEnumerator Reload()
     {
         isReloading = true;
-        GetComponent<AudioSource>().clip = reloadSound;
-        GetComponent<AudioSource>().Play();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
+        reloadSource.Play();
+        yield return new WaitForSeconds(1f);
         currentBulletCount = maxBulletCount;
         isReloading = false;
+    }
+
+    public override void StartReloading()
+    {
+        if (isReloading) return;
+        StartCoroutine(Reload());
     }
 }

@@ -8,6 +8,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class ChangeGun : MonoBehaviour
 {
     public SO_Gun[] guns;
+    private int currentGunIndex = 0;
 
     [Header("Insert Right Hand A Button")]
     [SerializeField] public InputAction aButtonAction;
@@ -62,8 +63,8 @@ public class ChangeGun : MonoBehaviour
             }
         }
 
-        int index = Random.Range(0, guns.Length);
-        Instantiate(guns[index].gunPrefab, GetPlayerFrontPosition(), transform.rotation);
+        currentGunIndex = (currentGunIndex + 1) % guns.Length;
+        Instantiate(guns[currentGunIndex].gunPrefab, new Vector3(GetPlayerFrontPosition().x, 1, GetPlayerFrontPosition().z), transform.rotation);
     }
 
     private Vector3 GetPlayerFrontPosition()

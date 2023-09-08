@@ -11,8 +11,8 @@ public class SMG_Shooting : Gun_Base
     public GameObject bulletObj;
     public Transform frontOfGun;
 
-    [SerializeField] private AudioClip gunShotSound;
-    [SerializeField] private AudioClip reloadSound;
+    [SerializeField] private AudioSource gunShotSource;
+    [SerializeField] private AudioSource reloadSource;
 
     private int currentBulletCount = 0;
     [SerializeField] private int maxBulletCount = 30;
@@ -33,8 +33,7 @@ public class SMG_Shooting : Gun_Base
     {
         if (isReloading) return;
         currentBulletCount--;
-        GetComponent<AudioSource>().clip = gunShotSound;
-        GetComponent<AudioSource>().Play();
+        gunShotSource.Play();
         GameObject spawnedBullet = Instantiate(bulletObj, (frontOfGun.position) + frontOfGun.forward * 0.3f, frontOfGun.rotation);
         spawnedBullet.GetComponent<Rigidbody>().velocity = speed * new Vector3(frontOfGun.forward.x + UnityEngine.Random.Range(-bulletSpread, bulletSpread), frontOfGun.forward.y + UnityEngine.Random.Range(-bulletSpread, bulletSpread), frontOfGun.forward.z); ;
         Destroy(spawnedBullet, 5f);
@@ -69,10 +68,16 @@ public class SMG_Shooting : Gun_Base
     private IEnumerator Reload()
     {
         isReloading = true;
-        GetComponent<AudioSource>().clip = reloadSound;
-        GetComponent<AudioSource>().Play();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.3f);
+        reloadSource.Play();
+        yield return new WaitForSeconds(1f);
         currentBulletCount = maxBulletCount;
         isReloading = false;
+    }
+
+    public override void StartReloading()
+    {
+        if (isReloading) return;
+        StartCoroutine(Reload());
     }
 }

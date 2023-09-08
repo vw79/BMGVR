@@ -8,8 +8,8 @@ public class FireBullet : Gun_Base
     public GameObject bulletObj;
     public Transform frontOfGun;
 
-    [SerializeField] private AudioClip gunShotSound;
-    [SerializeField] private AudioClip reloadSound;
+    [SerializeField] private AudioSource gunShotSource;
+    [SerializeField] private AudioSource reloadSource;
 
     [SerializeField] private int maxBulletCount = 10;
     private int currentBulletCount = 0;
@@ -28,8 +28,7 @@ public class FireBullet : Gun_Base
         if (isReloading) return;
 
         currentBulletCount--;
-        GetComponent<AudioSource>().clip = gunShotSound;
-        GetComponent<AudioSource>().Play();
+        gunShotSource.Play();
         GameObject spawnedBullet = Instantiate(bulletObj, (frontOfGun.position) + frontOfGun.forward * 0.3f, frontOfGun.rotation);
         spawnedBullet.GetComponent<Rigidbody>().velocity = speed * frontOfGun.forward;
         Destroy(spawnedBullet, 5f);
@@ -44,11 +43,16 @@ public class FireBullet : Gun_Base
     private IEnumerator Reload()
     {
         isReloading = true;
-        GetComponent<AudioSource>().clip = reloadSound;
-        GetComponent<AudioSource>().Play();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.2f);
+        reloadSource.Play();
+        yield return new WaitForSeconds(0.3f);
         currentBulletCount = maxBulletCount;
         isReloading = false;
     }
 
+    public override void StartReloading()
+    {
+        if (isReloading) return;
+        StartCoroutine(Reload());
+    }
 }

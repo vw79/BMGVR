@@ -3801,6 +3801,7 @@ GameObject:
   - component: {fileID: 1836622551}
   - component: {fileID: 1836622553}
   - component: {fileID: 1836622554}
+  - component: {fileID: 1836622555}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Player
@@ -3914,6 +3915,35 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: Generic XR Controller
       m_Action: A Button
+      m_Flags: 0
+    m_Flags: 0
+--- !u!114 &1836622555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836622548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d8c7c01d429114d954db2d0509c596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bButtonAction:
+    m_Name: B Button
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 0bea3766-1785-4fe4-b30b-1d2d806acd64
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 8b420104-8768-4935-b6c8-583fd5c00bd9
+      m_Path: <XRController>{RightHand}/secondaryButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: B Button
       m_Flags: 0
     m_Flags: 0
 --- !u!1001 &1836922961

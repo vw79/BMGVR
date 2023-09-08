@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class FireBullet : MonoBehaviour
+public class FireBullet : Gun_Base
 {
     public float speed = 50f;
     public GameObject bulletObj;
     public Transform frontOfGun;
+
+    [SerializeField] private AudioClip gunShotSound;
+    [SerializeField] private AudioClip reloadSound;
 
     [SerializeField] private int maxBulletCount = 10;
     private int currentBulletCount = 0;
@@ -25,6 +28,7 @@ public class FireBullet : MonoBehaviour
         if (isReloading) return;
 
         currentBulletCount--;
+        GetComponent<AudioSource>().clip = gunShotSound;
         GetComponent<AudioSource>().Play();
         GameObject spawnedBullet = Instantiate(bulletObj, (frontOfGun.position) + frontOfGun.forward * 0.3f, frontOfGun.rotation);
         spawnedBullet.GetComponent<Rigidbody>().velocity = speed * frontOfGun.forward;
@@ -40,6 +44,8 @@ public class FireBullet : MonoBehaviour
     private IEnumerator Reload()
     {
         isReloading = true;
+        GetComponent<AudioSource>().clip = reloadSound;
+        GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(2f);
         currentBulletCount = maxBulletCount;
         isReloading = false;

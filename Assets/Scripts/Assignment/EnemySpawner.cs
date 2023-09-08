@@ -12,6 +12,9 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         StartCoroutine(SpawnEnemy());
+
+        //Ignore the collision between gun and enemy
+        Physics.IgnoreLayerCollision(11,10);
     }
 
     private IEnumerator SpawnEnemy()

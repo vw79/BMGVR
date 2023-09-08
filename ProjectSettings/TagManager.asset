@@ -18,8 +18,8 @@ TagManager:
   - Interactable
   - Interactable Ignore Ray
   - Body
-  - 
-  - 
+  - Enemy
+  - Gun
   - 
   - 
   - 

@@ -4,12 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class SMG_Shooting : MonoBehaviour
+public class SMG_Shooting : Gun_Base
 {
     public static event Action GunFired;
     public float speed = 50f;
     public GameObject bulletObj;
     public Transform frontOfGun;
+
+    [SerializeField] private AudioClip gunShotSound;
+    [SerializeField] private AudioClip reloadSound;
 
     private int currentBulletCount = 0;
     [SerializeField] private int maxBulletCount = 30;
@@ -30,6 +33,7 @@ public class SMG_Shooting : MonoBehaviour
     {
         if (isReloading) return;
         currentBulletCount--;
+        GetComponent<AudioSource>().clip = gunShotSound;
         GetComponent<AudioSource>().Play();
         GameObject spawnedBullet = Instantiate(bulletObj, (frontOfGun.position) + frontOfGun.forward * 0.3f, frontOfGun.rotation);
         spawnedBullet.GetComponent<Rigidbody>().velocity = speed * new Vector3(frontOfGun.forward.x + UnityEngine.Random.Range(-bulletSpread, bulletSpread), frontOfGun.forward.y + UnityEngine.Random.Range(-bulletSpread, bulletSpread), frontOfGun.forward.z); ;
@@ -65,6 +69,8 @@ public class SMG_Shooting : MonoBehaviour
     private IEnumerator Reload()
     {
         isReloading = true;
+        GetComponent<AudioSource>().clip = reloadSound;
+        GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(2f);
         currentBulletCount = maxBulletCount;
         isReloading = false;

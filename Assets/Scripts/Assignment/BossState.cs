@@ -41,7 +41,7 @@ public class BossState : MonoBehaviour
         int spawnCount = Random.Range(20, 30);
         for (int i = 0; i < spawnCount; i++)
         {
-            GameObject.Find("Enemy Spawner").GetComponent<EnemySpawner>().SpawnEnemy();
+            GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>().SpawnEnemy();
         }
     }
 

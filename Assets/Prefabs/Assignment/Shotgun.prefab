@@ -512,7 +512,7 @@ MonoBehaviour:
   gunShotSource: {fileID: 6035429579524995717}
   reloadSource: {fileID: 1659951947764731555}
   maxBulletCount: 1
-  pelletCount: 10
+  pelletCount: 20
   pelletSpread: 0.1
 --- !u!114 &6035429579524995738
 MonoBehaviour:

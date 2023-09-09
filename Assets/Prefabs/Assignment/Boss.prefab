@@ -2135,7 +2135,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7176943201264093328}
-  m_LocalRotation: {x: 0.35410497, y: -0.083127275, z: -0.003914671, w: 0.93149567}
+  m_LocalRotation: {x: 0.3541052, y: -0.08312999, z: -0.0039137118, w: 0.93149537}
   m_LocalPosition: {x: 10.007052, y: -95.3, z: -208.47383}
   m_LocalScale: {x: 150, y: 150, z: 150}
   m_Children:
@@ -2174,7 +2174,19 @@ MonoBehaviour:
         m_CallState: 2
   OnDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4647036323855233914}
+        m_TargetAssemblyTypeName: BossState, Assembly-CSharp
+        m_MethodName: OnDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &4481754157145770064
 Animator:
   serializedVersion: 3

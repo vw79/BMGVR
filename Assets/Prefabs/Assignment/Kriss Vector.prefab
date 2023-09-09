@@ -529,7 +529,7 @@ MonoBehaviour:
   frontOfGun: {fileID: 1884272507743954603}
   gunShotSource: {fileID: 1884272508255312769}
   reloadSource: {fileID: -141548042232477786}
-  maxBulletCount: 30
+  maxBulletCount: 50
   bulletSpread: 0.007
 --- !u!114 &1884272508255312771
 MonoBehaviour:

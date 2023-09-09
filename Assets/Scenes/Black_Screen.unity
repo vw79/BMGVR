@@ -642,7 +642,7 @@ GameObject:
   - component: {fileID: 812717124}
   - component: {fileID: 812717123}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -934,7 +934,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1038496517}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.079}
+  m_LocalPosition: {x: 0, y: 0, z: 0.677}
   m_LocalScale: {x: 0.002, y: 0.006, z: 0.1}
   m_Children:
   - {fileID: 2063323475}
@@ -945,7 +945,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0.677}
-  m_SizeDelta: {x: 1071.8, y: 211.6}
+  m_SizeDelta: {x: 768, y: 410}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1038496522
 MonoBehaviour:
@@ -959,7 +959,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e59420fffa15dd459dbe90f07f5e18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCam_Transform: {fileID: 0}
+  FollowTarget: {fileID: 0}
   distanceFromCamera: 1
 --- !u!114 &1038496523
 MonoBehaviour:
@@ -999,6 +999,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d06194f848178f84c837d895b9bc5640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Boss: {fileID: 0}
+  buttonTrigger: {fileID: 0}
   hideCanvas: 0
 --- !u!1 &1091868700
 GameObject:

@@ -23,12 +23,20 @@ public class UI_ButtonsManager : MonoBehaviour
 
         foreach (Button button in buttons)
         {
-            if (button.name == "Button Start")      //(change the button name)
+            switch (button.name)
             {
-                button.onClick.AddListener(() => buttonsFunction.StartGame());      //(apply the function)
-            }
+                case "Play":
+                    button.onClick.AddListener(() => buttonsFunction.StartGame());
+                    break;
 
-            //(repeat here)
+                case "Quit":
+                    button.onClick.AddListener(() => buttonsFunction.QuitGame());
+                    break;
+
+                case "Back":
+                    button.onClick.AddListener(() => buttonsFunction.ReturnScene());
+                    break;
+            }
         }
     }
 }

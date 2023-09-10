@@ -1,22 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance; // Singleton reference
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public FadeScreen fadeScreen;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // Player states
+    public bool shotgunGet { get; private set; }
+    public bool smgGet { get; private set; }
+    public bool shotgunTrap { get; private set; }
+    public bool smgTrap { get; private set; }
 
     private void Awake()
     {
@@ -33,23 +28,39 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    // Update the player states
+    public void SetShotgunGet(bool value)
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        shotgunGet = value;
+        Debug.Log("Shotgun get: " + shotgunGet);
     }
 
-    private void OnDisable()
+    public void SetSMGGet(bool value)
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        smgGet = value;
+        Debug.Log("SMG get: " + smgGet);
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    public void SetShotgunTrap(bool value)
     {
-       
+        shotgunTrap = value;
     }
 
-    public void LoadScene(int sceneIndex)
+    public void SetSMGTrap(bool value)
     {
+        smgTrap = value;
+    }
+
+    // Scene transition with fade effect
+    public void GoToScene(int sceneIndex)
+    {
+        StartCoroutine(GoToSceneRoutine(sceneIndex));
+    }
+
+    IEnumerator GoToSceneRoutine(int sceneIndex)
+    {
+        fadeScreen.FadeOut();
+        yield return new WaitForSeconds(fadeScreen.fadeDuration);
         SceneManager.LoadScene(sceneIndex);
     }
 }

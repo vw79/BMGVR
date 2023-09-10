@@ -9,7 +9,7 @@ public class SceneTransition : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.instance.LoadScene(sceneIndex);
+            GameManager.instance.GoToScene(sceneIndex);
         }
     }
 }

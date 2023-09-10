@@ -43,6 +43,7 @@ public class ChangeGun : MonoBehaviour
         {
             if(saved_gun.gunType == gun.GetGunType())
             {
+                UpdateGunInGameManager();
                 return true;
             }
         }
@@ -67,6 +68,30 @@ public class ChangeGun : MonoBehaviour
         for (int i = 0; i < guns[currentGunIndex].gunCount; i++)
         {
             Instantiate(guns[currentGunIndex].gunPrefab, new Vector3(GetPlayerFrontPosition().x, Mathf.Clamp(GetPlayerFrontPosition().y, 1.5f, Mathf.Infinity), GetPlayerFrontPosition().z), transform.rotation);
+        }
+    }
+
+    private void UpdateGunInGameManager()
+    {
+        // Check if the gun is already registered in GameManager to prevent setting the value multiple times
+        switch (guns[currentGunIndex].gunType)
+        {
+           
+            case "Shotgun":
+                Debug.Log("hi");
+                if (!GameManager.instance.shotgunGet) // Check if shotgun is not already registered
+                {
+                    GameManager.instance.SetShotgunGet(true);
+                    Debug.Log("Shotgun get: " + GameManager.instance.shotgunGet);
+                }
+                break;
+            case "SMG":
+                if (!GameManager.instance.smgGet) // Check if SMG is not already registered
+                {
+                    GameManager.instance.SetSMGGet(true);
+                }
+                break;
+                // Add more cases for other gun type strings if needed
         }
     }
 

@@ -9,6 +9,9 @@ TagManager:
   - Climbable
   - Gun
   - Fire
+  - Bullet
+  - ShotgunTrap
+  - SMGTrap
   layers:
   - Default
   - TransparentFX

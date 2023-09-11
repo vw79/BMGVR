@@ -4,14 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject xrOrigin;
     public static GameManager instance; // Singleton reference
     public FadeScreen fadeScreen;
 
     // Player states
-    public bool shotgunGet { get; private set; }
-    public bool smgGet { get; private set; }
-    public bool shotgunTrap { get; private set; }
-    public bool smgTrap { get; private set; }
+    public SO_Gun[] Guns { get; private set; }
 
     private void Awake()
     {
@@ -28,27 +26,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update the player states
-    public void SetShotgunGet(bool value)
+    private void Start()
     {
-        shotgunGet = value;
-        Debug.Log("Shotgun get: " + shotgunGet);
+        xrOrigin = GameObject.Find("XR Origin");
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    public void SetSMGGet(bool value)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        smgGet = value;
-        Debug.Log("SMG get: " + smgGet);
+        xrOrigin = GameObject.Find("XR Origin");
+
+        if (xrOrigin)
+        {
+            ChangeGun changeGunScript = xrOrigin.GetComponent<ChangeGun>();
+            if (changeGunScript)
+            {
+                changeGunScript.guns = Guns;
+            }
+        }
     }
 
-    public void SetShotgunTrap(bool value)
-    {
-        shotgunTrap = value;
-    }
 
-    public void SetSMGTrap(bool value)
+    private void OnDestroy()
     {
-        smgTrap = value;
+        // Unsubscribe from the event when this object is destroyed
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     // Scene transition with fade effect
@@ -59,8 +61,17 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GoToSceneRoutine(int sceneIndex)
     {
+        if (xrOrigin)
+        {
+            ChangeGun changeGunScript = xrOrigin.GetComponent<ChangeGun>();
+            if (changeGunScript)
+            {
+                Guns = changeGunScript.guns;
+            }
+        }
         fadeScreen.FadeOut();
         yield return new WaitForSeconds(fadeScreen.fadeDuration);
         SceneManager.LoadScene(sceneIndex);
     }
+
 }

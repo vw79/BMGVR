@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class TrapDoor : MonoBehaviour
+public class CagMob : MonoBehaviour
 {
     private void OnTriggerEnter(Collider collision)
     {

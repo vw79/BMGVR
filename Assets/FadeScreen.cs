@@ -9,23 +9,21 @@ public class FadeScreen : MonoBehaviour
     public Color fadeColor;
     private Renderer rend;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rend = GetComponent<Renderer>();
-        if (fadeOnStart)
-        {
-            FadeIn();
-        }
+        gameObject.SetActive(false);
     }
 
     public void FadeIn()
     {
+        gameObject.SetActive(true);
         Fade(1, 0);
     }
 
     public void FadeOut()
     {
+        gameObject.SetActive(true);
         Fade(0, 1);
     }
 
@@ -46,6 +44,10 @@ public class FadeScreen : MonoBehaviour
 
             timer += Time.deltaTime;
             yield return null;
+        }
+        if (alphaOut == 0)
+        {
+            gameObject.SetActive(false);
         }
     }
 }

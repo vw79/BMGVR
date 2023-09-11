@@ -29,12 +29,14 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         xrOrigin = GameObject.Find("XR Origin");
+        fadeScreen = GameObject.Find("XR Origin/Camera Offset/Main Camera/FadeScreen").GetComponent<FadeScreen>();
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         xrOrigin = GameObject.Find("XR Origin");
+        fadeScreen = xrOrigin.transform.Find("Camera Offset/Main Camera/FadeScreen").GetComponent<FadeScreen>();
 
         if (xrOrigin)
         {

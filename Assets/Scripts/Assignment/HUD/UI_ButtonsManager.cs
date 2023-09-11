@@ -34,7 +34,7 @@ public class UI_ButtonsManager : MonoBehaviour
                     break;
 
                 case "Back":
-                    button.onClick.AddListener(() => buttonsFunction.ReturnScene());
+                    button.onClick.AddListener(() => buttonsFunction.RestartGame());
                     break;
             }
         }

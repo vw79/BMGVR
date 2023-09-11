@@ -16,6 +16,11 @@ public class HealthSystem : MonoBehaviour
         health = maxHealth;
     }
 
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
     public void TakeDamage(float damage)
     {
         health -= damage;
@@ -27,5 +32,10 @@ public class HealthSystem : MonoBehaviour
         }
 
         OnHurt.Invoke();
+    }
+
+    public float GetHealth()
+    {
+        return health;
     }
 }

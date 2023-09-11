@@ -6,34 +6,32 @@ using UnityEngine.SceneManagement;
 
 public class PlayerDeath : MonoBehaviour
 {
-    private Image image;
-    private bool isDead = false;
+    public FadeScreen fadeScreen;
+    public bool isDead { get; private set; }
 
     private void Start()
     {
-        image = GameObject.Find("Dead Screen").GetComponent<Image>();
+        isDead = false;
     }
 
     private void Update()
     {
-        if(!isDead)
-        {
-            return;
-        }
 
-        if(image != null)
-        {
-              image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + 0.6f * Time.deltaTime);
-        }
-
-        if(image.color.a >= 1f)
-        {
-            SceneManager.LoadScene("DeadScreen");
-        }
     }
+
+
 
     public void OnDeath()
     {
         isDead = true;
+        GameManager.instance.GoToScene(2);
+        //fadeScreen.FadeIn();
+        //StartCoroutine(gameOver());
+    }
+
+    IEnumerator gameOver()
+    {
+        yield return new WaitForSeconds(fadeScreen.fadeDuration + 1);
+        SceneManager.LoadScene(2);
     }
 }

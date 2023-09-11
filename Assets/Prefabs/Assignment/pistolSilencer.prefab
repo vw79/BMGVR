@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 11400000, guid: c874c17accc4dc74189ea940fc7d3ae4, type: 2}
-  speed: 50
+  speed: 70
   bulletObj: {fileID: 8502405034520672088, guid: 2525de8407a47b84494dab5f5fba9ae1, type: 3}
   frontOfGun: {fileID: 8352618666297554770}
   gunShotSource: {fileID: 8352618665962419183}

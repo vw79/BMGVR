@@ -34,7 +34,10 @@ public class EnemyController : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             // Actions to let player lose or hurt player, depends on the game design
-            collision.gameObject.GetComponent<PlayerDeath>().OnDeath();
+            if(collision.gameObject.GetComponent<PlayerDeath>().isDead == false)
+            {
+                collision.gameObject.GetComponent<PlayerDeath>().OnDeath();
+            }
         }
     }
 
